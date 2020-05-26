@@ -1,9 +1,7 @@
-﻿using XamFormsMDet.Models;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+using XamFormsMDet.Models;
 
 namespace XamFormsMDet.Views
 {
@@ -12,8 +10,10 @@ namespace XamFormsMDet.Views
     [DesignTimeVisible(false)]
     public partial class MenuPage : ContentPage
     {
-        MainPage RootPage { get => Application.Current.MainPage as MainPage; }
+        //MainPage RootPage { get => Application.Current.MainPage as MainPage; }
+
         List<HomeMenuItem> menuItems;
+
         public MenuPage()
         {
             InitializeComponent();
@@ -26,16 +26,24 @@ namespace XamFormsMDet.Views
             };
 
             ListViewMenu.ItemsSource = menuItems;
-
             ListViewMenu.SelectedItem = menuItems[0];
+
             ListViewMenu.ItemSelected += async (sender, e) =>
             {
                 if (e.SelectedItem == null)
                     return;
 
                 var id = (int)((HomeMenuItem)e.SelectedItem).Id;
-                await RootPage.NavigateFromMenu(id);
+
+                var home = Application.Current.MainPage as NavigationPage;
+
+                var homePage = home.RootPage as HomePage;
+
+                var rootPage = homePage.MasterDetailMainPage;
+
+                await rootPage.NavigateFromMenu(id);
             };
         }
+
     }
 }

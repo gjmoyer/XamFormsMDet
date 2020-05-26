@@ -5,6 +5,7 @@
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             mc:Ignorable="d"
             xmlns:views="clr-namespace:XamFormsMDet.Views"
+            NavigationPage.HasNavigationBar="False"
             x:Class="XamFormsMDet.Views.MainPage">
 
     <MasterDetailPage.Master>
